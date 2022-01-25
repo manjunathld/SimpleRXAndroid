@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textMessage;
     private Observable<String> observable;
     private Observer<String> observer;
+    private View.OnClickListener onClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSubscribe = findViewById(R.id.bv_subscribe);
         textMessage = findViewById(R.id.tv_message);
         observable = Observable.just("Data is Observed");
+
         observer = new Observer<String>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
@@ -52,12 +54,14 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        buttonSubscribe.setOnClickListener(new View.OnClickListener() {
+        onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 subscribeNow();
             }
-        });
+        };
+
+        buttonSubscribe.setOnClickListener(onClickListener);
 
     }
 
